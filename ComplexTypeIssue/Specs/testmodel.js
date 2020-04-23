@@ -69,4 +69,17 @@
 		}).then(v => done());
 
 	});
+	it("api/testmodels?$filter=description/fr eq 'Au revoir'", function (done) {
+		fetch("api/testmodels?$filter=description/fr eq 'Au revoir'").then(function (result) {
+			expect(result.ok).toBe(true);
+			return result.json();
+		}).then(data => {
+			expect(data.value.length).toBe(1);
+			expect(data.value[0].Description.Fr).toBe("Au revoir");
+		}).catch(f => {
+			fail(f);
+
+		}).then(v => done());
+
+	});
 });
